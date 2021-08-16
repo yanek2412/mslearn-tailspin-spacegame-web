@@ -1,15 +1,16 @@
 ### YamlMime:Yaml
-# ms.openlocfilehash: 0364a60a41692918f4a23187eee7d5e0d89d3474
+# ms.openlocfilehash: 76732dd4dc87e0690f31761ab6f5c63b39bb6966
+
 # ms.sourcegitcommit: 82f364d63269c277208cf43051f26cc26a25f1a4
 # ms.translationtype: HT
 # ms.contentlocale: ru-RU
 # ms.lasthandoff: 06/09/2021
-# ms.locfileid: "111866722"
+# ms.locfileid: "111871276"
+
 trigger:
 - '*'
 pool:
   name: default
-  vmImage: ubuntu-latest
   demands:
   - npm
 variables:
@@ -43,6 +44,13 @@ steps:
     command: build
     arguments: --no-restore --configuration $(buildConfiguration)
     projects: '**/*.csproj'
+- task: DotNetCoreCLI@2
+  displayName: Run unit tests - $(buildConfiguration)
+  inputs:
+    command: test
+    arguments: --no-build --configuration $(buildConfiguration)
+    publishTestResults: true
+    projects: '**/*.Tests.csproj'
 - task: DotNetCoreCLI@2
   displayName: Publish the project - $(buildConfiguration)
   inputs:
