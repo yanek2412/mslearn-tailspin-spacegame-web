@@ -9,8 +9,7 @@
  - execute npm install --global --production windows-build-tools
  - execute npm install in current folder
  - execute npm install -g allure-commandline --save-dev
-           npm install mocha-allure-reporter   
-            mocha --reporter mocha-allure-reporter
+ - execute npm install -g chromedriver@latest
 ## Command to run tests
   npx wdio wdio.conf.js
 
